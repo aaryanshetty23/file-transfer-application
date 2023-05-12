@@ -5,7 +5,7 @@ HEADER = 64
 PORT = 5072
 FORMAT = 'utf-8'
 DISCONNECT = "!DISCONNECT"
-SERVER = ""  # Add the IP address of the server here
+SERVER = "" # Enter the IP address of the server
 SIZE=1024
 FILENAME=""
 FILESIZE=0
@@ -53,7 +53,11 @@ def send_file():
     j="" 
     j=j+msg # get filename
     FILENAME=msg
-    FILESIZE = os.path.getsize(FILENAME)
+    #FILESIZE = os.path.getsize(FILENAME)
+    #FILESIZE= os.path.getsize(FILENAME)
+    
+    FILESIZE = os.path.getsize("Sample_files_cl/"+FILENAME)
+    
     message = msg.encode(FORMAT)  # encode message
     msg_length = len(message)  # get filename length
     send_len = str(msg_length).encode(FORMAT)  # encoding str_len
@@ -69,7 +73,7 @@ def send_file():
     # Data transfer 
     
  
-    with open(FILENAME, "r") as f:
+    with open("Sample_files_cl/"+FILENAME , "r") as f:
         data = f.read(SIZE)
         print(data)
         client.send(data.encode(FORMAT))
@@ -80,7 +84,8 @@ path = os.path.abspath(__file__)
 path=path[:-9]
 
 
-files = os.listdir(path)
+#files = os.listdir(path)
+files=os.listdir(path+"/Sample_files_cl")
 q=""
 for file in files:
     q=q+file+"\n"       

@@ -29,21 +29,25 @@ def handle_client(conn, addr):
 
         
             if msg_length:
-                
+                print("m1",msg_length)
+                msg_length = msg_length.split("_")[0]
+                msg_length = int(msg_length.strip())
                 #print(msg_length)
                 try:
                     msg = conn.recv(int(msg_length)).decode(FORMAT)
                 except:
                     send(conn)
                 else:
+                    print("m2",msg)
 
                     if msg == "!DISCONNECT":
                         connected = False
                         print(f"[{addr}] {msg}")
                 
-                    elif os.path.isfile(msg):
+                    elif os.path.isfile("Sample_files_sr/"+msg):
                         try:
-                            with open(msg, 'rb') as file:
+                            print("File exists")
+                            with open("Sample_files_sr/"+msg, 'rb') as file:
                                 file_data = file.read()
                                 conn.send(file_data)
                                 print("File sent")
@@ -65,7 +69,9 @@ def start():
 
 
 
-        files = os.listdir(path)
+        # how to add os.listdir(path/"Server/Sample_files_sr") to the FINAL variable
+        files = os.listdir(path+"/Sample_files_sr")
+        
         si=""
         for file in files:
             print(file)
@@ -90,7 +96,7 @@ def send(conn):
  
     print("[+] Filename and filesize received from the client.")
     #conn.send("Filename and filesize received".encode(FORMAT))
-    with open(f"{FILENAME}", "w") as f:
+    with open("Sample_files_sr/"+FILENAME , "w") as f:
         
         #data = conn.recv(SIZE).decode(FORMAT)
         #print("FILE CONTENT",data)
