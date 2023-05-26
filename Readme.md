@@ -4,8 +4,19 @@ This project implements a simple file transfer system using a client-server arch
 
 ## Files
 
-- `Server.py`: Server-side application
-- `Client.py`: Client-side application
+1. **`Server.py`: Server-side application**
+    - Listens for incoming connections on a specified port.
+    - Handles multiple client connections concurrently using threading.
+    - Can send files to clients upon request.
+    - Receives and stores files sent by clients.
+    - Provides a list of available files to clients upon connection.
+
+2. **`Client.py`: Client-side application**
+    - Connects to the server using a specified IP address and port.
+    - Allows users to choose between sending or receiving files.
+    - Can request and download files from the server.
+    - Can send local files to the server.
+    - Displays a list of available files on both client and server sides.
 
 ## Setup
 
@@ -45,6 +56,17 @@ Make sure to update the `SERVER` variable in `Client.py` with the correct IP add
 - Send files from client to server
 - Receive files from server to client
 - Simple command-line interface
+
+
+## Configuration
+
+- Server configuration (in `Server.py`):
+- `PORT`: 5072 (can be modified if needed)
+- `SERVER`: "0.0.0.0" (listens on all available network interfaces)
+
+- Client configuration (in `Client.py`):
+- `PORT`: 5072 (should match the server's port)
+- `SERVER`: "" (update this to match your server's IP address)
 
 
 
